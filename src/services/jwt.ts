@@ -4,6 +4,7 @@ import moment from 'moment';
 import User from '../models/User';
 
 export interface UserInterface{
+    id:string,
     name: string,
     surname: string,
     nick: string,
@@ -18,6 +19,7 @@ export const secretKey = 'SPUTNIK';
 //we'll create the token func
 export const Auth =(user: UserInterface)=>{
     const payload ={
+        id:user.id,
         name: user.name,
         surname: user.surname,
         nick: user.nick,

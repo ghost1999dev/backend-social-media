@@ -61,6 +61,7 @@ class UserController {
                 return
             }
             const IUser: UserInterface = {
+                id:findUser._id ? findUser._id.toString():'',
                 name: findUser.name,
                 surname: findUser.surname,
                 nick: findUser.nick,
@@ -124,13 +125,55 @@ class UserController {
      }
      async updateUserById(req:Authentication,res:Response){
         try {
+            //Client information
             const userBody=req.body
+            //Database information
             const userToken=req.user
+            let condition = false
+            //Find the information about the user
+            const findData = await User.find({
+                name:userBody.name,
+                email:userBody.email
+            })
+            console.log("Pass the find");
+            findData.forEach((element:any)=>{
+                console.log(element.name);
+            })
 
-            console.log(userBody);
+            if (condition) {
+                res.send({
+                    status:true,
+                    message:"The user already existe"
+                })
+                return
+            }
+            //Prepare the new user object
+            let newUser ={
+                name:userBody.name,
+                surname:userBody.surname,
+                nick:userBody.nick,
+                password:userBody.password
+            }
+            //Encrypt the password
+            const hashedPassword = await bcrypt.hash(newUser.password, 10)
+            newUser.password=hashedPassword
+
+            //Update user 
+            const updateUserData= await User.findByIdAndUpdate(userToken.id,newUser)
+            
+            res.send({
+                status:true,
+                message:"Success",
+                updateUserData
+            })
             
             
         } catch (error) {
+            res.status(404).send({
+                status:false,
+                message:"Error",
+                error
+            })
             
         }
      }

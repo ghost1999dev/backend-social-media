@@ -15,9 +15,6 @@ const auth = (req: Authentication, res: Response, next: NextFunction) => {
             return
         }
         let token = req.headers.authorization.replace(/['"]+/g, '')
-        console.log(token);
-        console.log(secretKey);
-        
         let payload =jwt.decode(token,secretKey)
         if(payload.exp < moment().unix()){
             res.send({
