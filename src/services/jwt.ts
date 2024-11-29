@@ -3,6 +3,11 @@ import jwtsimple from 'jwt-simple';
 import moment from 'moment';
 import User from '../models/User';
 
+//import modules
+import jwtsimple from 'jwt-simple';
+import moment from 'moment';
+import User from '../models/User';
+
 export interface UserInterface{
     id:string,
     name: string,

@@ -3,6 +3,8 @@ import {  Schema,Document, model} from "mongoose";
 export interface UserInterface extends Document{
     name:string,
     surname:string,
+    nick: string,
+    email:string,
     password:string,
     email:string,
     nick:string,

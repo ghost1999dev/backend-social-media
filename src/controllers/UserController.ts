@@ -1,3 +1,4 @@
+
 import {  Request,Response} from "express";
 import User from "../models/User";
 import bcrypt from "bcrypt";
@@ -178,7 +179,6 @@ class UserController {
         }
      }
 
-
 }
 
-export default new UserController()
+export default new UserController();
