@@ -3,7 +3,13 @@ import jwtsimple from 'jwt-simple';
 import moment from 'moment';
 import User from '../models/User';
 
+//import modules
+import jwtsimple from 'jwt-simple';
+import moment from 'moment';
+import User from '../models/User';
+
 export interface UserInterface{
+    id:string,
     name: string,
     surname: string,
     nick: string,
@@ -14,10 +20,11 @@ export interface UserInterface{
 }
 
 //secret key
-export const secretKey = 'your-secret-key-here'; 
+export const secretKey = 'SPUTNIK'; 
 //we'll create the token func
 export const Auth =(user: UserInterface)=>{
     const payload ={
+        id:user.id,
         name: user.name,
         surname: user.surname,
         nick: user.nick,
@@ -28,6 +35,3 @@ export const Auth =(user: UserInterface)=>{
     }
     return jwtsimple.encode(payload, secretKey)
 }
-
-
-

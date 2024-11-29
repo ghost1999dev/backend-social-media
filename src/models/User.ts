@@ -1,11 +1,13 @@
 import {  Schema,Document, model} from "mongoose";
 
-interface UserInterface extends Document{
+export interface UserInterface extends Document{
     name:string,
     surname:string,
     nick: string,
     email:string,
     password:string,
+    email:string,
+    nick:string,
     role:string,
     image:string,
     created_at:Date
@@ -21,12 +23,8 @@ const UserModel=new Schema<UserInterface>({
         type:String
     },
     nick:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
+      type:String,
+      required:true
     },
     password:{
         type:String,
@@ -42,7 +40,7 @@ const UserModel=new Schema<UserInterface>({
     },
     created_at:{
         type:Date,
-        default: Date.now()
+        default:Date.now()
     }
 
 })
